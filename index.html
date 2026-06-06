@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Offerpath — AI-powered resume builder</title>
+<title>Offerpath - AI-powered resume builder</title>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -114,10 +114,10 @@
   <!-- HEADER -->
   <header class="fade-in">
     <div class="header-meta">Personal project · 2025–2026</div>
-    <h1 class="header-title">Offerpath —<br><em>AI-powered</em> resume builder</h1>
-    <p class="header-desc">A full-stack platform that helps job seekers build ATS-optimized resumes, match keywords to job descriptions, track applications, and generate cover letters — all powered by Claude. Built with React, Node.js, PostgreSQL, and OAuth.</p>
+    <h1 class="header-title">Offerpath -<br><em>AI-powered</em> resume builder</h1>
+    <p class="header-desc">A full-stack platform that helps job seekers build ATS-optimized resumes, match keywords to job descriptions, track applications, and generate cover letters - all powered by Claude. Built with React, Node.js, PostgreSQL, and OAuth.</p>
     <div class="header-links">
-      <a class="btn-demo" href="mailto:adityakantsharma@gmail.com?subject=Offerpath%20demo%20access&body=Hi%20Aditya%2C%20I%27d%20love%20to%20see%20a%20demo%20of%20Offerpath." >✉ Request demo access</a>
+      <a class="btn-demo" href="mailto:aditya.kant.sharma@gmail.com?subject=Offerpath%20demo%20access&body=Hi%20Aditya%2C%20I%27d%20love%20to%20see%20a%20demo%20of%20Offerpath." >✉ Request demo access</a>
     </div>
     <p class="header-note">Interested in a live demo? Reach out and I'll share access directly.</p>
     <div class="metrics">
@@ -165,7 +165,7 @@
         <span class="arch-node">Anthropic Claude API</span>
       </div>
       <div class="arch-note">
-        The browser only ever talks to the Vercel origin. /api and /auth are proxied server-side so the session cookie is first-party — no third-party cookie issues across browsers with default settings. The backend holds all secrets (Claude key, OAuth credentials) and never exposes them to the client.
+        The browser only ever talks to the Vercel origin. /api and /auth are proxied server-side so the session cookie is first-party - no third-party cookie issues across browsers with default settings. The backend holds all secrets (Claude key, OAuth credentials) and never exposes them to the client.
       </div>
     </div>
   </section>
@@ -176,7 +176,7 @@
   <section class="fade-in">
     <div class="section-label">How Claude is used</div>
     <h2 class="section-title">Six distinct AI workflows</h2>
-    <p class="section-sub">Claude is called from a secure backend proxy — the API key never touches the browser.</p>
+    <p class="section-sub">Claude is called from a secure backend proxy - the API key never touches the browser.</p>
     <div class="claude-grid">
       <div class="claude-card">
         <div class="claude-card-tag">Streaming</div>
@@ -191,7 +191,7 @@
       <div class="claude-card">
         <div class="claude-card-tag">Agentic edit</div>
         <div class="claude-card-title">Auto-tailor resume</div>
-        <div class="claude-card-desc">Claude rewrites the summary and skills to include missing JD keywords, then updates the Zustand store directly — no copy-paste needed.</div>
+        <div class="claude-card-desc">Claude rewrites the summary and skills to include missing JD keywords, then updates the Zustand store directly - no copy-paste needed.</div>
       </div>
       <div class="claude-card">
         <div class="claude-card-tag">Personalized</div>
@@ -224,7 +224,7 @@
   <section class="fade-in">
     <div class="section-label">Testing</div>
     <h2 class="section-title">59 tests across three layers</h2>
-    <p class="section-sub">Full coverage from store reducers to user interactions — API mocked so no real Claude calls happen in CI.</p>
+    <p class="section-sub">Full coverage from store reducers to user interactions - API mocked so no real Claude calls happen in CI.</p>
     <div class="test-bar-wrap">
       <div class="test-row"><div class="test-label">Store (Zustand)</div><div class="test-bar"><div class="test-fill" style="width:100%"></div></div><div class="test-count">13</div></div>
       <div class="test-row"><div class="test-label">API helpers</div><div class="test-bar"><div class="test-fill" style="width:62%"></div></div><div class="test-count">8</div></div>
@@ -242,7 +242,7 @@
     <div class="section-label">Reflection</div>
     <h2 class="section-title">What I learned</h2>
     <div class="learned-box">
-      "The hardest part wasn't the AI integration — streaming Claude responses into a React UI is surprisingly clean. The real work was the deployment architecture: getting session cookies to work first-party across Vercel and Render required understanding SameSite cookie policies, Render's reverse proxy headers, and ultimately proxying auth through Vercel. The lesson: cross-origin auth is a solved problem, but only if you know which layer to solve it at."
+      "The hardest part wasn't the AI integration - streaming Claude responses into a React UI is surprisingly clean. The real work was the deployment architecture: getting session cookies to work first-party across Vercel and Render required understanding SameSite cookie policies, Render's reverse proxy headers, and ultimately proxying auth through Vercel. The lesson: cross-origin auth is a solved problem, but only if you know which layer to solve it at."
     </div>
   </section>
 
