@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Offerpath — AI-powered resume builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1D9E75; --green-dark: #0B6E50; --green-light: #E0F5EC;
+    --ink: #0F1410; --ink2: #2A2E2B; --ink3: #5A5F5C; --ink4: #8A908C;
+    --bg: #F7F6F2; --bg2: #FFFFFF; --border: rgba(15,20,16,0.1);
+    --serif: 'Instrument Serif', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--ink); font-size: 15px; line-height: 1.6; overflow-x: hidden; }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 0 28px; }
+  section { padding: 72px 0; }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+  /* HEADER */
+  header { padding: 48px 0 56px; border-bottom: 1px solid var(--border); }
+  .header-meta { font-size: 12px; font-weight: 500; color: var(--ink4); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 20px; }
+  .header-title { font-family: var(--serif); font-size: clamp(36px, 6vw, 58px); line-height: 1.1; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 20px; }
+  .header-title em { font-style: italic; color: var(--green); }
+  .header-desc { font-size: 16px; color: var(--ink3); max-width: 580px; line-height: 1.7; margin-bottom: 28px; }
+  .header-links { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-demo { display: inline-flex; align-items: center; gap: 8px; background: var(--green); color: white; font-family: var(--sans); font-size: 13px; font-weight: 600; padding: 10px 20px; border-radius: 6px; text-decoration: none; transition: background 0.15s, transform 0.1s; letter-spacing: 0.01em; }
+  .btn-demo:hover { background: var(--green-dark); transform: translateY(-1px); }
+  .btn-secondary { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--ink2); font-family: var(--sans); font-size: 13px; font-weight: 500; padding: 10px 20px; border-radius: 6px; text-decoration: none; border: 1px solid var(--border); transition: border-color 0.15s; }
+  .btn-secondary:hover { border-color: var(--ink3); }
+  .header-note { font-size: 12px; color: var(--ink4); margin-top: 14px; }
+
+  /* METRICS */
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin: 48px 0 0; }
+  .metric { background: var(--bg2); padding: 24px 20px; text-align: center; }
+  .metric-val { font-family: var(--serif); font-size: 36px; color: var(--green); line-height: 1; margin-bottom: 6px; }
+  .metric-lbl { font-size: 12px; color: var(--ink4); font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; }
+
+  /* SECTION HEADINGS */
+  .section-label { font-size: 11px; font-weight: 600; color: var(--green); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 10px; }
+  .section-title { font-family: var(--serif); font-size: clamp(24px, 4vw, 34px); color: var(--ink); letter-spacing: -0.02em; margin-bottom: 6px; }
+  .section-sub { font-size: 15px; color: var(--ink3); max-width: 520px; line-height: 1.65; margin-bottom: 40px; }
+
+  /* FEATURES */
+  .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .feature { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 22px 24px; transition: box-shadow 0.15s; }
+  .feature:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+  .feature-icon { width: 32px; height: 32px; background: var(--green-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; font-size: 16px; }
+  .feature-title { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 5px; }
+  .feature-desc { font-size: 13px; color: var(--ink3); line-height: 1.55; }
+
+  /* ARCHITECTURE */
+  .arch-box { background: var(--ink); color: #E8EDE9; border-radius: 12px; padding: 36px 40px; font-family: var(--mono); font-size: 13px; line-height: 1.8; position: relative; overflow: hidden; }
+  .arch-box::before { content: ''; position: absolute; top: -80px; right: -80px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(29,158,117,0.15) 0%, transparent 70%); pointer-events: none; }
+  .arch-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+  .arch-node { background: rgba(29,158,117,0.15); border: 1px solid rgba(29,158,117,0.3); color: #5DCAA5; padding: 4px 12px; border-radius: 4px; white-space: nowrap; }
+  .arch-arrow { color: #5DCAA5; }
+  .arch-note { margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px; color: #6A8070; line-height: 1.65; }
+
+  /* CLAUDE USAGE */
+  .claude-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .claude-card { border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; background: var(--bg2); }
+  .claude-card-tag { display: inline-block; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; background: var(--green-light); color: var(--green-dark); padding: 2px 8px; border-radius: 3px; margin-bottom: 10px; }
+  .claude-card-title { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 5px; }
+  .claude-card-desc { font-size: 13px; color: var(--ink3); line-height: 1.55; }
+
+  /* STACK */
+  .stack-table { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 8px 24px; }
+  .stack-row { display: grid; grid-template-columns: 120px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--border); align-items: start; }
+  .stack-row:last-child { border-bottom: none; }
+  .stack-layer { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink4); padding-top: 2px; }
+  .stack-pills { display: flex; flex-wrap: wrap; gap: 7px; }
+  .pill { font-size: 12px; font-weight: 500; padding: 4px 11px; border-radius: 20px; border: 1px solid var(--border); background: var(--bg2); color: var(--ink2); }
+  .pill.green { background: var(--green-light); border-color: rgba(29,158,117,0.25); color: var(--green-dark); }
+
+  /* TESTS */
+  .test-bar-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 24px 28px; }
+  .test-row { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+  .test-row:last-child { margin-bottom: 0; }
+  .test-label { font-size: 12px; font-weight: 600; color: var(--ink2); width: 160px; flex-shrink: 0; }
+  .test-bar { flex: 1; height: 6px; background: var(--green-light); border-radius: 3px; overflow: hidden; }
+  .test-fill { height: 100%; background: var(--green); border-radius: 3px; transition: width 1s ease; }
+  .test-count { font-family: var(--mono); font-size: 12px; color: var(--ink4); width: 40px; text-align: right; flex-shrink: 0; }
+
+  /* LEARNED */
+  .learned-box { background: var(--bg2); border: 1px solid var(--border); border-left: 3px solid var(--green); border-radius: 0 10px 10px 0; padding: 24px 28px; font-size: 15px; color: var(--ink2); line-height: 1.75; font-style: italic; }
+
+  /* FOOTER */
+  footer { padding: 36px 0; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--ink4); }
+  footer a { color: var(--ink3); text-decoration: none; }
+  footer a:hover { color: var(--green); }
+
+  /* ANIMATIONS */
+  .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.55s ease, transform 0.55s ease; }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 600px) {
+    .metrics { grid-template-columns: repeat(2, 1fr); }
+    .features-grid, .claude-grid { grid-template-columns: 1fr; }
+    .stack-row { grid-template-columns: 1fr; gap: 8px; }
+    footer { flex-direction: column; gap: 8px; text-align: center; }
+    .arch-box { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <header class="fade-in">
+    <div class="header-meta">Personal project · 2025–2026</div>
+    <h1 class="header-title">Offerpath —<br><em>AI-powered</em> resume builder</h1>
+    <p class="header-desc">A full-stack platform that helps job seekers build ATS-optimized resumes, match keywords to job descriptions, track applications, and generate cover letters — all powered by Claude. Built with React, Node.js, PostgreSQL, and OAuth.</p>
+    <div class="header-links">
+      <a class="btn-demo" href="mailto:adityakantsharma@gmail.com?subject=Offerpath%20demo%20access&body=Hi%20Aditya%2C%20I%27d%20love%20to%20see%20a%20demo%20of%20Offerpath." >✉ Request demo access</a>
+    </div>
+    <p class="header-note">Interested in a live demo? Reach out and I'll share access directly.</p>
+    <div class="metrics">
+      <div class="metric"><div class="metric-val">8</div><div class="metric-lbl">AI features</div></div>
+      <div class="metric"><div class="metric-val">59</div><div class="metric-lbl">automated tests</div></div>
+      <div class="metric"><div class="metric-val">3</div><div class="metric-lbl">cloud platforms</div></div>
+      <div class="metric"><div class="metric-val">2</div><div class="metric-lbl">OAuth providers</div></div>
+    </div>
+  </header>
+
+  <!-- FEATURES -->
+  <section class="fade-in">
+    <div class="section-label">Features</div>
+    <h2 class="section-title">Everything for the job search</h2>
+    <p class="section-sub">Eight Claude-powered tools, from resume building to interview prep, all persisted per user.</p>
+    <div class="features-grid">
+      <div class="feature"><div class="feature-icon">📄</div><div class="feature-title">Resume Builder</div><div class="feature-desc">Section-by-section editor with live preview and one-click PDF export via jsPDF.</div></div>
+      <div class="feature"><div class="feature-icon">🎯</div><div class="feature-title">Keyword Matcher</div><div class="feature-desc">Paste a JD, get a match score with matched/missing keywords, and auto-tailor in one click.</div></div>
+      <div class="feature"><div class="feature-icon">⚡</div><div class="feature-title">Bullet Generator</div><div class="feature-desc">Turn rough notes into quantified, STAR-format achievements using streaming AI.</div></div>
+      <div class="feature"><div class="feature-icon">📊</div><div class="feature-title">Resume Score</div><div class="feature-desc">AI analysis across Impact, Brevity, ATS, and Overall with specific actionable improvements.</div></div>
+      <div class="feature"><div class="feature-icon">✉️</div><div class="feature-title">Cover Letter Generator</div><div class="feature-desc">Tone- and length-aware, tailored per company and role using your resume as context.</div></div>
+      <div class="feature"><div class="feature-icon">🎤</div><div class="feature-title">Interview Prep</div><div class="feature-desc">Role-specific behavioral, technical, and situational questions with answer tips.</div></div>
+      <div class="feature"><div class="feature-icon">📋</div><div class="feature-title">Job Tracker</div><div class="feature-desc">Kanban board (Saved → Applied → Interview → Offer) with cross-feature context.</div></div>
+      <div class="feature"><div class="feature-icon">🔐</div><div class="feature-title">Accounts & persistence</div><div class="feature-desc">Google + GitHub OAuth. Resumes and jobs saved per user in PostgreSQL.</div></div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ARCHITECTURE -->
+  <section class="fade-in">
+    <div class="section-label">Architecture</div>
+    <h2 class="section-title">How it's built</h2>
+    <p class="section-sub">Frontend and backend are on separate platforms, with Vercel proxying all API and auth calls so session cookies stay first-party.</p>
+    <div class="arch-box">
+      <div class="arch-row">
+        <span class="arch-node">Vercel (React/Vite)</span>
+        <span class="arch-arrow">── /api, /auth ──▶</span>
+        <span class="arch-node">Render (Express)</span>
+        <span class="arch-arrow">── pg ──▶</span>
+        <span class="arch-node">Neon (Postgres)</span>
+      </div>
+      <div class="arch-row" style="margin-top:6px; padding-left:220px;">
+        <span class="arch-arrow">└── proxies ──▶</span>
+        <span class="arch-node">Anthropic Claude API</span>
+      </div>
+      <div class="arch-note">
+        The browser only ever talks to the Vercel origin. /api and /auth are proxied server-side so the session cookie is first-party — no third-party cookie issues across browsers with default settings. The backend holds all secrets (Claude key, OAuth credentials) and never exposes them to the client.
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- CLAUDE USAGE -->
+  <section class="fade-in">
+    <div class="section-label">How Claude is used</div>
+    <h2 class="section-title">Six distinct AI workflows</h2>
+    <p class="section-sub">Claude is called from a secure backend proxy — the API key never touches the browser.</p>
+    <div class="claude-grid">
+      <div class="claude-card">
+        <div class="claude-card-tag">Streaming</div>
+        <div class="claude-card-title">Bullet & cover letter generation</div>
+        <div class="claude-card-desc">Streams tokens directly to the UI as they arrive, so output feels instant. Uses the full resume store as context for every prompt.</div>
+      </div>
+      <div class="claude-card">
+        <div class="claude-card-tag">Structured JSON</div>
+        <div class="claude-card-title">Keyword matching & resume scoring</div>
+        <div class="claude-card-desc">Prompts return strict JSON (matched/missing keywords, scores, feedback) parsed and rendered as interactive UI elements.</div>
+      </div>
+      <div class="claude-card">
+        <div class="claude-card-tag">Agentic edit</div>
+        <div class="claude-card-title">Auto-tailor resume</div>
+        <div class="claude-card-desc">Claude rewrites the summary and skills to include missing JD keywords, then updates the Zustand store directly — no copy-paste needed.</div>
+      </div>
+      <div class="claude-card">
+        <div class="claude-card-tag">Personalized</div>
+        <div class="claude-card-title">Interview prep</div>
+        <div class="claude-card-desc">Full resume text is injected into the prompt so questions are tailored to the candidate's actual background, not generic templates.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- TECH STACK -->
+  <section class="fade-in">
+    <div class="section-label">Tech stack</div>
+    <h2 class="section-title">Tools used</h2>
+    <div class="stack-table">
+      <div class="stack-row"><div class="stack-layer">Frontend</div><div class="stack-pills"><span class="pill green">React 18</span><span class="pill green">Vite</span><span class="pill green">Zustand</span><span class="pill">jsPDF</span></div></div>
+      <div class="stack-row"><div class="stack-layer">Backend</div><div class="stack-pills"><span class="pill green">Node.js</span><span class="pill green">Express</span><span class="pill">Passport</span><span class="pill">express-session</span></div></div>
+      <div class="stack-row"><div class="stack-layer">Database</div><div class="stack-pills"><span class="pill green">PostgreSQL</span><span class="pill green">Neon</span><span class="pill">connect-pg-simple</span></div></div>
+      <div class="stack-row"><div class="stack-layer">AI</div><div class="stack-pills"><span class="pill green">Claude Sonnet</span><span class="pill">Streaming API</span><span class="pill">Structured JSON output</span></div></div>
+      <div class="stack-row"><div class="stack-layer">Auth</div><div class="stack-pills"><span class="pill">Google OAuth 2.0</span><span class="pill">GitHub OAuth</span><span class="pill">Session cookies</span></div></div>
+      <div class="stack-row"><div class="stack-layer">Testing</div><div class="stack-pills"><span class="pill green">Vitest</span><span class="pill green">React Testing Library</span><span class="pill">59 tests</span></div></div>
+      <div class="stack-row"><div class="stack-layer">CI / CD</div><div class="stack-pills"><span class="pill">GitHub Actions</span><span class="pill">Vercel</span><span class="pill">Render</span></div></div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- TESTS -->
+  <section class="fade-in">
+    <div class="section-label">Testing</div>
+    <h2 class="section-title">59 tests across three layers</h2>
+    <p class="section-sub">Full coverage from store reducers to user interactions — API mocked so no real Claude calls happen in CI.</p>
+    <div class="test-bar-wrap">
+      <div class="test-row"><div class="test-label">Store (Zustand)</div><div class="test-bar"><div class="test-fill" style="width:100%"></div></div><div class="test-count">13</div></div>
+      <div class="test-row"><div class="test-label">API helpers</div><div class="test-bar"><div class="test-fill" style="width:62%"></div></div><div class="test-count">8</div></div>
+      <div class="test-row"><div class="test-label">PDF export</div><div class="test-bar"><div class="test-fill" style="width:23%"></div></div><div class="test-count">3</div></div>
+      <div class="test-row"><div class="test-label">UI components</div><div class="test-bar"><div class="test-fill" style="width:92%"></div></div><div class="test-count">12</div></div>
+      <div class="test-row"><div class="test-label">Auth layer</div><div class="test-bar"><div class="test-fill" style="width:38%"></div></div><div class="test-count">5</div></div>
+      <div class="test-row"><div class="test-label">Page interactions</div><div class="test-bar"><div class="test-fill" style="width:100%"></div></div><div class="test-count">18</div></div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- LEARNED -->
+  <section class="fade-in">
+    <div class="section-label">Reflection</div>
+    <h2 class="section-title">What I learned</h2>
+    <div class="learned-box">
+      "The hardest part wasn't the AI integration — streaming Claude responses into a React UI is surprisingly clean. The real work was the deployment architecture: getting session cookies to work first-party across Vercel and Render required understanding SameSite cookie policies, Render's reverse proxy headers, and ultimately proxying auth through Vercel. The lesson: cross-origin auth is a solved problem, but only if you know which layer to solve it at."
+    </div>
+  </section>
+
+  <footer>
+    <span>Offerpath · Aditya Kant Sharma · Built 2025–2026 · React + Claude (Anthropic)</span>
+    <span><a href="https://adityakantsharma.github.io/equity-analyst-showcase/">← equity-analyst</a></span>
+  </footer>
+
+</div>
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
