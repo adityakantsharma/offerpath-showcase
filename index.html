@@ -127,7 +127,7 @@
     <p class="header-note">Interested in a live walkthrough? Reach out and I'll share access directly.</p>
     <div class="metrics">
       <div class="metric"><div class="metric-val">8</div><div class="metric-lbl">AI features shipped</div></div>
-      <div class="metric"><div class="metric-val">87</div><div class="metric-lbl">automated tests</div></div>
+      <div class="metric"><div class="metric-val">92</div><div class="metric-lbl">automated tests</div></div>
       <div class="metric"><div class="metric-val">6</div><div class="metric-lbl">weeks to production</div></div>
       <div class="metric"><div class="metric-val">$0</div><div class="metric-lbl">monthly infra cost</div></div>
     </div>
@@ -180,7 +180,7 @@
           <div class="decision-tag">Build strategy</div>
         </div>
         <div class="decision-body">Validated all eight features and the full AI integration in a single file before committing to a component architecture. This meant the React migration was a structural exercise, not an exploratory one - every component had a known shape and behaviour before a line of JSX was written.</div>
-        <div class="decision-outcome"><span>Outcome:</span> Zero feature regressions during migration. The test suite was written against behaviour that was already proven to work, and has grown to 87 tests as features were added.</div>
+        <div class="decision-outcome"><span>Outcome:</span> Zero feature regressions during migration. The test suite was written against behaviour that was already proven to work, and has grown to 90+ tests as features were added.</div>
       </div>
       <div class="decision">
         <div class="decision-header">
@@ -203,8 +203,16 @@
           <div class="decision-title">Full test suite before deployment, not after</div>
           <div class="decision-tag">Engineering culture</div>
         </div>
-        <div class="decision-body">A full test suite across store logic, API helpers, UI components, and user interactions - established before the first production deploy and grown to 87 tests as the app evolved. The suite caught two real bugs during the auth layer addition: a Sidebar component that would crash without a mock auth context, and a jsPDF v4 constructor change that broke the PDF export mock. Both would have been silent failures in production.</div>
+        <div class="decision-body">A full test suite across store logic, API helpers, UI components, and user interactions - established before the first production deploy and grown to 90+ tests as the app evolved. The suite caught two real bugs during the auth layer addition: a Sidebar component that would crash without a mock auth context, and a jsPDF v4 constructor change that broke the PDF export mock. Both would have been silent failures in production.</div>
         <div class="decision-outcome"><span>Outcome:</span> Clean deploys from day one. CI blocks any push that breaks the suite.</div>
+      </div>
+      <div class="decision">
+        <div class="decision-header">
+          <div class="decision-title">Fix a bug's root cause structurally, not just patch the instance</div>
+          <div class="decision-tag">Judgment</div>
+        </div>
+        <div class="decision-body">A bug shipped where adding or moving a job updated the UI but silently failed to persist - the data vanished on reload. The quick fix was to add the missing API call. Instead I traced it to the real cause: persistence was wired per-handler, so any new action could forget to save. I moved all job persistence into a single service where every mutation updates local state and the backend together, making the omission impossible to express. Then I added tests that assert the API was actually called - not just that the UI updated - so the whole class of bug is guarded against, not just the one instance.</div>
+        <div class="decision-outcome"><span>Outcome:</span> One code path for job persistence, a documented rationale for the pattern, and tests that catch the failure mode rather than the symptom.</div>
       </div>
     </div>
   </section>
@@ -260,7 +268,7 @@
       <div class="stack-row"><div class="stack-layer">Backend</div><div class="stack-pills"><span class="pill green">Node.js</span><span class="pill green">Express</span><span class="pill">Passport</span><span class="pill">express-session</span></div></div>
       <div class="stack-row"><div class="stack-layer">Database</div><div class="stack-pills"><span class="pill green">PostgreSQL</span><span class="pill green">Neon</span><span class="pill">connect-pg-simple</span></div></div>
       <div class="stack-row"><div class="stack-layer">AI</div><div class="stack-pills"><span class="pill green">Claude Sonnet</span><span class="pill">Streaming API</span><span class="pill">Structured JSON output</span></div></div>
-      <div class="stack-row"><div class="stack-layer">Testing</div><div class="stack-pills"><span class="pill green">Vitest</span><span class="pill green">React Testing Library</span><span class="pill">87 tests, 3 layers</span></div></div>
+      <div class="stack-row"><div class="stack-layer">Testing</div><div class="stack-pills"><span class="pill green">Vitest</span><span class="pill green">React Testing Library</span><span class="pill">90+ tests, 3 layers</span></div></div>
       <div class="stack-row"><div class="stack-layer">CI / CD</div><div class="stack-pills"><span class="pill">GitHub Actions</span><span class="pill">Vercel</span><span class="pill">Render</span></div></div>
     </div>
   </section>
@@ -285,7 +293,7 @@
       <div class="principle">
         <div class="principle-num">03</div>
         <div class="principle-title">Testing is a delivery accelerator</div>
-        <div class="principle-desc">A test suite established before deployment - now 87 tests - meant every subsequent change - auth addition, OAuth fix, dependency upgrade - could be made confidently. The suite paid back its cost within the first week of changes.</div>
+        <div class="principle-desc">A test suite established before deployment - now 90+ tests - meant every subsequent change - auth addition, OAuth fix, dependency upgrade - could be made confidently. The suite paid back its cost within the first week of changes.</div>
       </div>
       <div class="principle">
         <div class="principle-num">04</div>
