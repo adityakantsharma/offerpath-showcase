@@ -140,8 +140,8 @@
     <p class="section-sub">Eight features shipped. Click through to request a live walkthrough.</p>
     <div class="screenshots-grid">
       <div class="screenshot-item wide">
-        <img src="screenshots/screenshot-resume.png" alt="Resume Builder with live preview" loading="lazy">
-        <div class="screenshot-label">Resume Builder - live editor with PDF export</div>
+        <img src="screenshots/screenshot-complete.png" alt="Offerpath full application view" loading="lazy">
+        <div class="screenshot-label">The full application - resume builder, live preview, and AI tools</div>
       </div>
       <div class="screenshot-item">
         <img src="screenshots/screenshot-keywords.png" alt="Keyword Matcher showing match score" loading="lazy">
@@ -237,7 +237,7 @@
         <span class="arch-node">Anthropic Claude API</span>
       </div>
       <div class="arch-note">
-        The browser talks only to the Vercel origin. /api and /auth are proxied server-side - session cookies stay first-party, secrets never reach the client, and the backend can be swapped or scaled independently of the frontend. OAuth credentials, the Claude API key, and database connection strings live only in the backend environment.
+        The browser talks only to the Vercel origin. /api and /auth are proxied server-side - session cookies stay first-party, secrets never reach the client, and the backend can be swapped or scaled independently of the frontend. OAuth credentials, the Claude API key, and database connection strings live only in the backend environment. The AI endpoints sit behind authentication and per-user rate limits (burst and daily caps) so a public demo can't run up unbounded API cost.
       </div>
     </div>
   </section>
