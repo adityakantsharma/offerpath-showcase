@@ -126,7 +126,7 @@
     </div>
     <p class="header-note">Interested in a live walkthrough? Reach out and I'll share access directly.</p>
     <div class="metrics">
-      <div class="metric"><div class="metric-val">8</div><div class="metric-lbl">AI features shipped</div></div>
+      <div class="metric"><div class="metric-val">8</div><div class="metric-lbl">features shipped</div></div>
       <div class="metric"><div class="metric-val">92</div><div class="metric-lbl">automated tests</div></div>
       <div class="metric"><div class="metric-val">6</div><div class="metric-lbl">weeks to production</div></div>
       <div class="metric"><div class="metric-val">$0</div><div class="metric-lbl">monthly infra cost</div></div>
@@ -248,11 +248,11 @@
   <section class="fade-in">
     <div class="section-label">What was built</div>
     <h2 class="section-title">Eight production features</h2>
-    <p class="section-sub">From a live resume editor with PDF export to a kanban job tracker - all persisted per user, all powered by Claude.</p>
+    <p class="section-sub">From a live resume editor with PDF export to a kanban job tracker - all persisted per user, all powered by Claude. <span style="display:inline-flex;align-items:center;gap:6px;font-size:13px;"><span style="background:var(--green-light);color:var(--green-dark);padding:1px 8px;border-radius:3px;font-size:11px;font-weight:600;">green</span> = primary capability &nbsp; plain = supporting</span></p>
     <div class="stack-table">
-      <div class="stack-row"><div class="stack-layer">Resume</div><div class="stack-pills"><span class="pill green">Live editor + PDF export</span><span class="pill">Version management</span><span class="pill">AI summary generation</span></div></div>
-      <div class="stack-row"><div class="stack-layer">AI tools</div><div class="stack-pills"><span class="pill green">Keyword matcher</span><span class="pill green">Bullet generator</span><span class="pill green">Resume scorer</span><span class="pill">Cover letter</span><span class="pill">Interview prep</span></div></div>
-      <div class="stack-row"><div class="stack-layer">Job tracking</div><div class="stack-pills"><span class="pill green">Kanban board</span><span class="pill">Cross-feature context</span><span class="pill">Per-user persistence</span></div></div>
+      <div class="stack-row"><div class="stack-layer">Resume</div><div class="stack-pills"><span class="pill green">Live editor + PDF export</span><span class="pill">Version management</span><span class="pill green">AI summary generation</span></div></div>
+      <div class="stack-row"><div class="stack-layer">AI tools</div><div class="stack-pills"><span class="pill green">Keyword matcher</span><span class="pill green">Bullet generator</span><span class="pill green">Resume scorer</span><span class="pill green">Cover letter</span><span class="pill green">Interview prep</span></div></div>
+      <div class="stack-row"><div class="stack-layer">Job tracking</div><div class="stack-pills"><span class="pill green">Kanban board</span><span class="pill">Interview notes + rounds</span><span class="pill">Per-user persistence</span></div></div>
       <div class="stack-row"><div class="stack-layer">Auth</div><div class="stack-pills"><span class="pill green">Google OAuth</span><span class="pill green">GitHub OAuth</span><span class="pill">Account linking by email</span></div></div>
     </div>
   </section>
@@ -263,13 +263,15 @@
   <section class="fade-in">
     <div class="section-label">Tech stack</div>
     <h2 class="section-title">Tools and platforms</h2>
+    <p class="section-sub" style="margin-bottom:20px;"><span style="display:inline-flex;align-items:center;gap:6px;font-size:13px;"><span style="background:var(--green-light);color:var(--green-dark);padding:1px 8px;border-radius:3px;font-size:11px;font-weight:600;">green</span> = primary technology in that layer &nbsp; plain = supporting library</span></p>
     <div class="stack-table">
       <div class="stack-row"><div class="stack-layer">Frontend</div><div class="stack-pills"><span class="pill green">React 18</span><span class="pill green">Vite</span><span class="pill green">Zustand</span><span class="pill">jsPDF</span></div></div>
       <div class="stack-row"><div class="stack-layer">Backend</div><div class="stack-pills"><span class="pill green">Node.js</span><span class="pill green">Express</span><span class="pill">Passport</span><span class="pill">express-session</span></div></div>
       <div class="stack-row"><div class="stack-layer">Database</div><div class="stack-pills"><span class="pill green">PostgreSQL</span><span class="pill green">Neon</span><span class="pill">connect-pg-simple</span></div></div>
-      <div class="stack-row"><div class="stack-layer">AI</div><div class="stack-pills"><span class="pill green">Claude Sonnet</span><span class="pill">Streaming API</span><span class="pill">Structured JSON output</span></div></div>
+      <div class="stack-row"><div class="stack-layer">AI</div><div class="stack-pills"><span class="pill green">Claude Sonnet</span><span class="pill green">Streaming API</span><span class="pill green">Structured JSON output</span></div></div>
+      <div class="stack-row"><div class="stack-layer">Auth</div><div class="stack-pills"><span class="pill green">Google OAuth 2.0</span><span class="pill green">GitHub OAuth</span><span class="pill">Passport.js</span><span class="pill">express-session</span></div></div>
       <div class="stack-row"><div class="stack-layer">Testing</div><div class="stack-pills"><span class="pill green">Vitest</span><span class="pill green">React Testing Library</span><span class="pill">90+ tests, 3 layers</span></div></div>
-      <div class="stack-row"><div class="stack-layer">CI / CD</div><div class="stack-pills"><span class="pill">GitHub Actions</span><span class="pill">Vercel</span><span class="pill">Render</span></div></div>
+      <div class="stack-row"><div class="stack-layer">CI / CD</div><div class="stack-pills"><span class="pill green">GitHub Actions</span><span class="pill green">Vercel</span><span class="pill green">Render</span></div></div>
     </div>
   </section>
 
