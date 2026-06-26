@@ -264,7 +264,7 @@
         <span class="arch-node">Anthropic Claude API</span>
       </div>
       <div class="arch-note">
-        The browser talks only to the Vercel origin. /api and /auth are proxied server-side - session cookies stay first-party (eliminating third-party cookie blocking across all browsers), secrets never reach the client, and the backend can be scaled or swapped independently. The AI endpoints sit behind authentication and per-user rate limits. OAuth credentials, the Claude API key, and the database connection string live only in the backend environment.
+        The browser talks only to the Vercel origin. /api and /auth are proxied server-side - session cookies stay first-party (eliminating third-party cookie blocking across all browsers), secrets never reach the client, and the backend can be scaled or swapped independently. The AI endpoints sit behind authentication and per-user rate limits. OAuth credentials, the Claude API key, and the database connection string live only in the backend environment. The backend runs on a paid instance and is always on.
       </div>
     </div>
   </section>
